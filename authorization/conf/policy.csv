@@ -1,0 +1,4 @@
+p, PRODUCT_ADMIN, /pa/*, (GET)|(POST)|(DELETE)|(PUT)
+p, SCHOOL_ADMIN, /sa/*, (GET)|(POST)|(PUT)|(DELETE)
+
+p, PUBLIC, /p/*, (GET)|(POST)
