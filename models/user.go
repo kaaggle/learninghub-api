@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/go-ozzo/ozzo-validation"
 	"time"
 
 	"github.com/globalsign/mgo/bson"
@@ -16,4 +17,11 @@ type User struct {
 	UpdatedAt time.Time     `json:"updated_at" bson:"updated_at"`
 
 	Role string `json:"role" bson:"role"`
+}
+
+func (u User) Validate() error {
+	return validation.ValidateStruct(&u,
+		validation.Field(&u.Email, validation.Required),
+		validation.Field(&u.Password, validation.Required),
+		validation.Field(&u.Name, validation.Required))
 }

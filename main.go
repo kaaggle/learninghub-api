@@ -9,6 +9,10 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/casbin/casbin"
 
+	"schoolsystem/learninghub-api/user"
+	userRepository "schoolsystem/learninghub-api/user/repository"
+	userUsecase "schoolsystem/learninghub-api/user/usecase"
+
 	"schoolsystem/learninghub-api/course"
 	courseRepository "schoolsystem/learninghub-api/course/repository"
 	courseUsecase "schoolsystem/learninghub-api/course/usecase"
@@ -67,6 +71,10 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.SetHeader("Content-Type", "application/json"))
+
+	userRepo := userRepository.NewMongoUserRepository(dbConn)
+	userUsecase := userUsecase.NewUserUsecase(userRepo)
+	user.NewUserHttpHandler(r, userUsecase)
 
 	courseRepo := courseRepository.NewMongoCourseRepository(dbConn)
 	courseUsecase := courseUsecase.NewCourseUsecase(courseRepo)

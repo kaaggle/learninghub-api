@@ -21,7 +21,7 @@ func NewConfig() (*Config, error) {
 	baseURLEnv := os.Getenv("LEARNINGHUB_API_URL")
 	dbURL := os.Getenv("KAAGGLE_DB_URL")
 	secret := os.Getenv("KAAGGLE_SECRET")
-	//casbinConfPath := os.Getenv("LEARNINGHUB_CASBIN_CONF_PATH")
+	//casbinConfPath := os.Getenv("CHALK_CASBIN_CONF_PATH")
 	dir, err := os.Getwd()
 	if err != nil {
 		return nil, err
@@ -37,7 +37,7 @@ func NewConfig() (*Config, error) {
 		}, nil
 	}
 
-	return nil, errors.New("Please add LEARNINGHUB_API_URL, LEARNINGHUB_DB_URL and KAAGLE_SECRET environmental variables")
+	return nil, errors.New("Please add LEARNINGHUB_API_URL, KAAGGLE_DB_URL and KAAGGLE_SECRET environmental variables")
 }
 
 func (c *Config) String() string {
