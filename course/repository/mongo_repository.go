@@ -17,7 +17,7 @@ func NewMongoCourseRepository(session *mgo.Session) course.CourseRepository {
 
 	return &mongoCourseRepo{
 		Session:          session,
-		CourseCollection: session.DB("school-system").C("courses"),
+		CourseCollection: session.DB("school-system").C("lh-courses"),
 	}
 }
 
@@ -42,3 +42,25 @@ func (m *mongoCourseRepo) GetCourse(id string) (*models.Course, error) {
 
 	return &c, nil
 }
+
+func (m *mongoCourseRepo) AddCourse(c *models.Course) (*models.Course, error) {
+	err := m.CourseCollection.Insert(&c)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return c, nil
+}
+
+func (m *mongoCourseRepo) DeleteCourse(id string) (error) {
+	err := m.CourseCollection.Remove(bson.M{"_id": bson.ObjectIdHex(id)})
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+

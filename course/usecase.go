@@ -5,4 +5,7 @@ import "schoolsystem/learninghub-api/models"
 type CourseUsecase interface {
 	GetCourse(string) (*models.Course, error)
 	GetCourses() (*models.Courses, error)
+	AddCourse(*models.Course) (*models.Course, error)
+	DeleteCourse(string) (error)
+
 }
